@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans:wght@100..900&display=swap');
+
+body {
+    font-family: 'Encode Sans', sans-serif!important;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.bg-primary-color {
+    background-color: #47B12D;
+    color: white;
+}
+
+.btn-basic {
+    box-shadow: 0px 10px 10px -3px rgba(0,0,0,0.1);
+    color: white;
+    border-radius: 20px;
+    border: none;
+}
+
+label {
+    color: #545454!important;
+    font-weight: 400;
+}
+
+#home {
+    background: #EDEDED;
+    height: 100vh;
+}

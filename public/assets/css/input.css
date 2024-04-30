@@ -1,0 +1,9 @@
+.input-label {
+    font-size: 0.500rem;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+}
+

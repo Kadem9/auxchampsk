@@ -1,0 +1,37 @@
+.segment1 {
+    background-position: 0 0;
+}
+
+.segment2 {
+    background-position: 0 20%;
+}
+
+.segment3 {
+    background-position: 0 40%;
+}
+
+.segment4 {
+    background-position: 0 60%;
+}
+
+.segment5 {
+    background-position: 0 80%;
+}
+
+.image-segment {
+    height: 100px;
+    background-image: url('assets/img/register/legumes.png');
+    background-size: 100% 500%;
+    background-repeat: no-repeat;
+    margin-bottom: 5px;
+}
+
+
+.bg-container {
+    background-color: #C8E7C0;
+}
+
+.user-has-account {
+    font-size: 0.880rem;
+    color: #7d7d7d;
+}
