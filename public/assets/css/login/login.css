@@ -1,0 +1,49 @@
+.bg-image-block {
+        background: linear-gradient(0deg, rgba(66, 171, 78, 0.23), rgba(40, 165, 53, 0.22)), url("../../img/register/background-home.jpg") no-repeat;
+        background-position: center bottom;
+        background-size: cover;
+}
+
+.height-vh {
+        min-height: 100vh;
+}
+
+.information-block {
+        width: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+}
+
+.picture-block {
+        width: 50%;
+        overflow: hidden;
+}
+
+.logo {
+        position: absolute;
+        top: 20px;
+        left: 10px;
+        width: 300px;
+}
+
+.link-register {
+        color: #48a453;
+        text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+        .information-block {
+                width: 100%;
+        }
+
+        .picture-block {
+                width: 100%;
+        }
+        .box-parent {
+                display: flex;
+                flex-direction: column;
+        }
+}

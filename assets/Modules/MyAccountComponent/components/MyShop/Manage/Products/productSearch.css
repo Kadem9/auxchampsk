@@ -1,0 +1,42 @@
+.product-search {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-search input {
+    margin-bottom: 15px;
+}
+
+.product-list {
+    max-height: 400px; /* Set a maximum height for the list */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.product-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.product-item:hover {
+    background-color: #f0f0f0;
+}
+
+.product-image-search {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 15px;
+    border-radius: 5px;
+}
+
+.product-name {
+    font-size: 1rem;
+    color: #333;
+}

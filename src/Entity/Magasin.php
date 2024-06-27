@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\MagasinRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -9,10 +11,17 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: MagasinRepository::class)]
 #[ApiResource]
+#[ApiFilter(SearchFilter::class, properties: ['user' => 'exact'])]
 class Magasin
 {
+    const STATUS_WAITING_ACTIVATE = 0;
+    const STATUS_ACTIVATE = 1;
+    const STATUS_DESACTIVATE = 2;
+    const STATUS_WAITING_DELETE = 3;
+    const STATUS_DELETE = 4;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -56,9 +65,21 @@ class Magasin
     #[ORM\OneToMany(targetEntity: MagasinTags::class, mappedBy: 'magasin')]
     private Collection $magasinTags;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $status = null;
+
+    #[ORM\OneToMany(targetEntity: CategoryShop::class, mappedBy: 'magasin', orphanRemoval: true)]
+    private Collection $categoryShops;
+
+    #[ORM\OneToMany(targetEntity: ProductShop::class, mappedBy: 'magasin')]
+    private Collection $productShops;
+
     public function __construct()
     {
         $this->magasinTags = new ArrayCollection();
+        $this->status = self::STATUS_WAITING_ACTIVATE;
+        $this->categoryShops = new ArrayCollection();
+        $this->productShops = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -222,6 +243,78 @@ class Magasin
             // set the owning side to null (unless already changed)
             if ($magasinTag->getMagasin() === $this) {
                 $magasinTag->setMagasin(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?int $status): static
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CategoryShop>
+     */
+    public function getCategoryShops(): Collection
+    {
+        return $this->categoryShops;
+    }
+
+    public function addCategoryShop(CategoryShop $categoryShop): static
+    {
+        if (!$this->categoryShops->contains($categoryShop)) {
+            $this->categoryShops->add($categoryShop);
+            $categoryShop->setMagasin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategoryShop(CategoryShop $categoryShop): static
+    {
+        if ($this->categoryShops->removeElement($categoryShop)) {
+            // set the owning side to null (unless already changed)
+            if ($categoryShop->getMagasin() === $this) {
+                $categoryShop->setMagasin(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProductShop>
+     */
+    public function getProductShops(): Collection
+    {
+        return $this->productShops;
+    }
+
+    public function addProductShop(ProductShop $productShop): static
+    {
+        if (!$this->productShops->contains($productShop)) {
+            $this->productShops->add($productShop);
+            $productShop->setMagasin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProductShop(ProductShop $productShop): static
+    {
+        if ($this->productShops->removeElement($productShop)) {
+            // set the owning side to null (unless already changed)
+            if ($productShop->getMagasin() === $this) {
+                $productShop->setMagasin(null);
             }
         }
 

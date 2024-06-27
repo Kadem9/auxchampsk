@@ -96,6 +96,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Magasin::class, mappedBy: 'user')]
     private Collection $magasins;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $hasSeenWelcomePage = null;
+
     public function __construct()
     {
         $this->societes = new ArrayCollection();
@@ -376,6 +379,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $magasin->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isHasSeenWelcomePage(): ?bool
+    {
+        return $this->hasSeenWelcomePage;
+    }
+
+    public function setHasSeenWelcomePage(?bool $hasSeenWelcomePage): static
+    {
+        $this->hasSeenWelcomePage = $hasSeenWelcomePage;
 
         return $this;
     }

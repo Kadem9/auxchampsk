@@ -1,0 +1,47 @@
+.product-details-form {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.product-details-form h5 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.product-details-form .form-group,
+.product-details-form .form-row {
+    margin-bottom: 15px;
+}
+
+.product-details-form .form-label {
+    font-weight: bold;
+    color: #555;
+}
+
+.product-details-form .form-control {
+    border-radius: 5px;
+}
+
+.product-details-form .btn {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+}

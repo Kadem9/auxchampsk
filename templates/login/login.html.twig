@@ -1,0 +1,45 @@
+{% extends "login/base.html.twig" %}
+
+{% block title %}AuxChamps - Connexion{% endblock %}
+
+{% block body %}
+    <div class="container-fluid d-flex box-parent">
+        <div class="information-block">
+            <img class="logo" src="{{ asset('assets/logo-DMrNd1hm.png') }}" alt="logo du site"/>
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+                {% set flashCls = { 'success' : 'success', 'error' : 'danger' } %}
+                {% for label,
+                    messages in app.flashes(['success', 'error']) %}
+                    {% for message in messages %}
+                        <article class="alert alert-{{ flashCls[label] }} mt-2">
+                            {{ message | trans | raw }}
+                        </article>
+                    {% endfor %}
+                {% endfor %}
+
+                <h1 class="h3 mb-3 font-weight-normal">Formulaire de connexion</h1>
+                <label for="inputEmail">Adresse mail</label>
+                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                <label for="inputPassword">Mot de passe</label>
+                <input type="password" name="password" id="inputPassword" class="form-control mb-2" autocomplete="current-password" required>
+
+                <input type="hidden" name="_csrf_token"
+                       value="{{ csrf_token('authenticate') }}"
+                >
+
+                <button class="btn btn-lg btn-success" type="submit">
+                    Connexion
+                </button>
+
+                <a class="d-block mt-4 link-register" href="{{ path('register') }}">Pas de compte ? S'inscrire en cliquant ici</a>
+            </form>
+        </div>
+        <div class="picture-block bg-image-block height-vh">
+
+        </div>
+    </div>
+
+{% endblock %}

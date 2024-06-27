@@ -1,18 +1,17 @@
 import {Link, NavLink, Route} from "react-router-dom";
 import "../assets/css/navigation.css";
-import {AuthProvider, useAuth} from "../../../Context/AuthContext.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBuilding, faCircleInfo, faGear, faShop} from "@fortawesome/free-solid-svg-icons";
+import {useUser} from "../../../Context/UserContext.jsx";
 
 function Navigation({}){
-
-    const user = useAuth();
+    const {user} = useUser();
 
     return(
         <div className="bg-navigation">
             <div className="identification-users">
                 <span></span>
-                <h6>{user.currentUser.firstname} {user.currentUser.lastname}</h6>
+                <h6>{user.firstname} {user.lastname}</h6>
             </div>
             <NavLink
                 to='/mon-compte/informations-personnelles'

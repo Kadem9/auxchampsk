@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenue sur AuxChamps</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: url("{{ asset('assets/img/home/background.jpeg') }}");
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+        .welcome-container {
+            text-align: center;
+            max-width: 800px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+        .welcome-title {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: #3A9B24;
+        }
+        .welcome-description {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+        .steps-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        .step {
+            max-width: 220px;
+        }
+        .step-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #3A9B24;
+        }
+        .step-title {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        .step-description {
+            font-size: 1em;
+        }
+        .welcome-button {
+            background: #3A9B24;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .welcome-button:hover {
+            background: #2e7d1e;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .logo {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        /* Styles Responsives */
+        @media (max-width: 1200px) {
+            .welcome-container {
+                max-width: 700px;
+            }
+            .welcome-title {
+                font-size: 3em;
+            }
+            .step-icon {
+                font-size: 2.5em;
+            }
+            .step-title {
+                font-size: 1.1em;
+            }
+            .step-description {
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .welcome-container {
+                max-width: 600px;
+                padding: 30px;
+            }
+            .welcome-title {
+                font-size: 2.5em;
+            }
+            .step-icon {
+                font-size: 2em;
+            }
+            .step-title {
+                font-size: 1em;
+            }
+            .step-description {
+                font-size: 0.8em;
+            }
+            .steps-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-container {
+                max-width: 500px;
+                padding: 20px;
+            }
+            .welcome-title {
+                font-size: 2em;
+            }
+            .welcome-description {
+                font-size: 1.2em;
+            }
+            .step-icon {
+                font-size: 1.5em;
+            }
+            .step-title {
+                font-size: 0.9em;
+            }
+            .step-description {
+                font-size: 0.7em;
+            }
+            .welcome-button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .welcome-container {
+                max-width: 90%;
+                padding: 15px;
+            }
+            .welcome-title {
+                font-size: 1.5em;
+            }
+            .welcome-description {
+                font-size: 1em;
+            }
+            .step-icon {
+                font-size: 1.2em;
+            }
+            .step-title {
+                font-size: 0.8em;
+            }
+            .step-description {
+                font-size: 0.6em;
+            }
+            .welcome-button {
+                padding: 8px 16px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="welcome-container">
+    <h1 class="welcome-title">Bienvenue sur AuxChamps</h1>
+    <p class="welcome-description">AuxChamps est votre plateforme de référence pour les produits agricoles de qualité. Découvrez notre sélection unique, directement du producteur au consommateur.</p>
+    <div class="steps-container">
+        <div class="step">
+            <div class="step-icon">🌱</div>
+            <div class="step-title">Étape 1 ✓</div>
+            <div class="step-description">Inscrivez-vous gratuitement en quelques clics.</div>
+        </div>
+        <div class="step">
+            <div class="step-icon">🛒</div>
+            <div class="step-title">Étape 2</div>
+            <div class="step-description">Parcourez les catalogues des différents agriculteurs confirmés</div>
+        </div>
+        <div class="step">
+            <div class="step-icon">🚚</div>
+            <div class="step-title">Étape 3</div>
+            <div class="step-description">Recevez vos produits directement chez vous ou chez l’agriculteur.</div>
+        </div>
+    </div>
+    <a class="welcome-button" href="{{path('index')}}">C'est compris !</a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+<script>
+    // function startJourney() {
+    //     // Enregistrer l'information que l'utilisateur a vu la page de bienvenue
+    //     localStorage.setItem('hasSeenWelcomePage', 'true');
+    //     // Rediriger vers la page d'accueil
+    //     window.location.href = 'home.html';
+    // }}
+    //
+    // // Vérifier si l'utilisateur a déjà vu la page de bienvenue
+    // if (localStorage.getItem('hasSeenWelcomePage') === 'true') {
+    //     window.location.href = 'home.html';
+    // }
+
+    const defaults = {
+        spread: 360,
+        ticks: 100,
+        gravity: 0,
+        decay: 0.94,
+        startVelocity: 30,
+    };
+
+    function shoot() {
+        confetti({
+            ...defaults,
+            particleCount: 30,
+            scalar: 1.2,
+            shapes: ["circle", "square"],
+            colors: ["#fdd853", "#ffcb16", "#78ff44", "#da3253", "#fdff6a"],
+        });
+
+        confetti({
+            ...defaults,
+            particleCount: 20,
+            scalar: 2,
+            shapes: ["emoji"],
+            shapeOptions: {
+                emoji: {
+                    value: ["🍏", "🍎", "🍊","🍓","🥦","🥕", "🍍", "🥝", "🍇"],
+                },
+            },
+        });
+    }
+
+    setTimeout(shoot, 0);
+    setTimeout(shoot, 100);
+    setTimeout(shoot, 200);
+</script>
+</body>
+</html>

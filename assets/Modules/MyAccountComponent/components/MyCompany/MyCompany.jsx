@@ -1,43 +1,71 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import ModalCreate from "./ModalCreate.jsx";
-import {useAuth} from "../../../../Context/AuthContext.jsx";
-import {findSocieteByDirigeant} from "../../../../Api/Societe.js";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import ModalEdit from "./ModalEdit.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faPlus, faEdit, faTrash, faLocationDot, faCircleInfo} from "@fortawesome/free-solid-svg-icons";
+import { useSociete } from "../../../../Context/SocieteContext.jsx";
+import { toast } from "react-toastify";
+import Modal from "../../../Utils/Modal.jsx";
+import "../MyShop/css/MyShop.css";
 
-function MyCompany({}){
+function MyCompany() {
+    const { societes, loading, createSociete, updateSociete, deleteSociete, canDeleteSociete } = useSociete();
     const [pageCreate, setPageCreate] = useState(false);
-    const [societe, setSociete] = useState([{}]);
-    const {currentUser} = useAuth();
+    const [editSociete, setEditSociete] = useState(null);
 
-    useEffect( () => {
-        findSocieteByDirigeant(currentUser.id)
-            .then(response => {
-                setSociete(response)
-            })
+    const handleDelete = async (id) => {
+        if (!canDeleteSociete(id)) {
+            toast("Impossible de supprimer la société. Des magasins associés existent et ne sont pas supprimés.", { type: "error" });
+            return;
+        }
 
-    }, []);
-    console.log(societe)
-    return(
+        try {
+            await deleteSociete(id);
+            toast("Société supprimée avec succès", { type: "success" });
+        } catch (error) {
+            toast("Erreur lors de la suppression de la société", { type: "error" });
+        }
+    };
+
+    if (loading) {
+        return <div>Chargement...</div>;
+    }
+
+    return (
         <div className="bg-navigation p-4">
-            {societe ? (
+            {societes.length > 0 ? (
                 <>
                     <div className="head d-flex align-items-center mb-3">
                         <h5 className="m-0 p-0">Mes sociétés</h5>
                         <button className="rounded bg-primary-color border border-0 ms-2" onClick={() => setPageCreate(true)}>
-                            <FontAwesomeIcon icon={faPlus} />
+                            <FontAwesomeIcon icon={faPlus} /> Ajouter
                         </button>
                     </div>
 
                     <div className="row">
-                        {societe.map((societe) => (
-                            <div className="col-md-6" key={societe.id}>
-                            <div className="card mb-2">
-                                    <div className="card-body">
-                                        <h6>{societe.nom}</h6>
-                                        <p>{societe.statutJuridique}</p>
-                                        <p>{societe.adresseSiege}</p>
+                        {societes.map((societe) => (
+                            <div className="col-md-12" key={societe.id}>
+                                <div className="card-shop bg-myshop mb-2">
+                                    <div className="info-shop">
+                                        <h5 className="mb-2">{societe.nom}</h5>
+                                            <p className="p-icon-left">
+                                                <FontAwesomeIcon icon={faCircleInfo} />
+                                                {societe.statutJuridique}
+                                            </p>
+                                            <p className="p-icon-left">
+                                                <FontAwesomeIcon className="mr-3" icon={faLocationDot} />
+                                                {societe.adresseSiege}
+                                            </p>
                                     </div>
+                                        <div className="actions-shop">
+                                            <button className="btn-edit"
+                                                    onClick={() => setEditSociete(societe)}>
+                                                <FontAwesomeIcon icon={faEdit}/>
+                                            </button>
+                                            <button className="btn-delete" onClick={() => handleDelete(societe.id)}>
+                                                <FontAwesomeIcon icon={faTrash}/>
+                                            </button>
+                                        </div>
                                 </div>
                             </div>
                         ))}
@@ -47,20 +75,23 @@ function MyCompany({}){
                 <>
                     <h5>Mes sociétés</h5>
                     <p>Vous n'avez pas de société, souhaitez-vous ajouter votre société ?</p>
-                    <button className="w-100 mt-2 bg-primary-color border border-0 p-2"
-                            onClick={() => setPageCreate(true)}>C'est parti, j'ajoute ma société !
+                    <button className="w-100 mt-2 bg-primary-color border border-0 p-2" onClick={() => setPageCreate(true)}>
+                        C'est parti, j'ajoute ma société !
                     </button>
                 </>
             )}
-            {
-                pageCreate ? (
-                    <>
-                        <ModalCreate/>
-                    </>
-                ) : null}
+            {pageCreate && (
+                <Modal onClose={() => setPageCreate(false)}>
+                    <ModalCreate onClose={() => setPageCreate(false)} onCreate={createSociete} />
+                </Modal>
+            )}
+            {editSociete && (
+                <Modal onClose={() => setEditSociete(null)}>
+                    <ModalEdit societe={editSociete} onClose={() => setEditSociete(null)} onSave={updateSociete} />
+                </Modal>
+            )}
         </div>
-    )
-        ;
+    );
 }
 
 export default MyCompany;
