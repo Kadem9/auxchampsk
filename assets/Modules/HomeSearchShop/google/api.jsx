@@ -1,5 +1,5 @@
 export const geocodeCity = async (city) => {
-    const apiKey = "AIzaSyColEkRLJ0NRAAZhbWFXfxVNHPTqgwjn5c";
+    const apiKey = "SECRET";
     const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${city}&key=${apiKey}`);
     const data = await response.json();
     if (data.results.length > 0) {
