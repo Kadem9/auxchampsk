@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { useSociete } from "../../../../Context/SocieteContext.jsx";
 import { useUser } from "../../../../Context/UserContext.jsx";
+import AddressAutocomplete from "./AddressAutoComplete.jsx";
 
 function ModalCreate({ onClose, onCreate }) {
     const { societes, loading: loadingSocietes } = useSociete();
@@ -10,10 +11,14 @@ function ModalCreate({ onClose, onCreate }) {
         nom: "",
         date: "",
         rue: "",
+        ville: "",
+        codePostal: "",
         description: "",
         logo: null,
         siret: "",
         societeId: "",
+        latitude: null,
+        longitude: null,
         certified: false,
         cgu: false,
         user: "/api/users/" + user.id,
@@ -27,12 +32,23 @@ function ModalCreate({ onClose, onCreate }) {
         }));
     };
 
+    const handleAddressSelected = (address) => {
+        setData((prevData) => ({
+            ...prevData,
+            rue: address.rue,
+            ville: address.ville,
+            codePostal: address.codePostal,
+            latitude: address.latitude,
+            longitude: address.longitude,
+        }));
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const magasinData = {
             ...data,
-            societe: `/api/societes/${data.societeId}`, // Transforme l'ID de la société en IRI
+            societe: `/api/societes/${data.societeId}`,
         };
 
         try {
@@ -65,8 +81,20 @@ function ModalCreate({ onClose, onCreate }) {
                         <input type="date" className="form-control" id="date" value={data.date} onChange={handleChange} required />
                     </div>
                     <div className="col-md-12">
-                        <label htmlFor="rue">Adresse du magasin</label>
+                        <label htmlFor="address">Ville du magasin</label>
+                        <AddressAutocomplete onPlaceSelected={handleAddressSelected} />
+                    </div>
+                    <div className="col-md-12">
+                        <label htmlFor="rue">Rue</label>
                         <input type="text" className="form-control" id="rue" value={data.rue} onChange={handleChange} required />
+                    </div>
+                    <div className="col-md-12">
+                        <label htmlFor="ville">Ville</label>
+                        <input type="text" className="form-control" id="ville" value={data.ville} onChange={handleChange} required />
+                    </div>
+                    <div className="col-md-12">
+                        <label htmlFor="codePostal">Code Postal</label>
+                        <input type="text" className="form-control" id="codePostal" value={data.codePostal} onChange={handleChange} required />
                     </div>
                     <div className="col-md-12">
                         <label htmlFor="description">Description du magasin</label>

@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\File;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,7 +36,7 @@ class RegisterController extends AbstractController
     {
         if ($request->isMethod('POST')) {
             $formData = $request->request->all();
-
+            $file = $request->files->get('picture');
             $firstname = $formData['firstname'];
             $lastname = $formData['lastname'];
             $email = $formData['email'];
@@ -68,6 +69,12 @@ class RegisterController extends AbstractController
             }
 
             $user = new User();
+
+            if($file){
+                $fileName = $this->uploadPicture($file);
+                $user->setPictureProfil($fileName);
+            }
+
             $user->setFirstname($firstname);
             $user->setLastname($lastname);
             $user->setEmail($email);
@@ -89,7 +96,13 @@ class RegisterController extends AbstractController
         return new JsonResponse(['status' => 'success']);
     }
 
-    private function uploadFile(): File {
+    private function uploadPicture(UploadedFile $file): string
+    {
+        $uploadDirectory = 'uploads/pictureProfilUser/';
+        $fileName = uniqid('', true).'.'.$file->guessExtension();
 
+        $file->move($uploadDirectory, $fileName);
+
+        return $fileName;
     }
 }

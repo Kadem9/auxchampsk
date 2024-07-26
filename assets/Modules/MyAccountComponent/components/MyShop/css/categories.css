@@ -1,0 +1,105 @@
+.categories-container {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.description {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.add-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.add-button:hover {
+    background-color: #0056b3;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.category-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.category-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.category-order {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.edit-button,
+.delete-button {
+    background: none;
+    border: none;
+    padding: 0.5rem 0;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    margin-right: 0.5rem;
+}
+
+.edit-button {
+    color: #ffc107;
+}
+
+.edit-button:hover {
+    color: #e0a800;
+}
+
+.delete-button {
+    color: #dc3545;
+}
+
+.delete-button:hover {
+    color: #c82333;
+}
+
+@media (max-width: 768px) {
+    .categories-container {
+        padding: 0.5rem;
+    }
+
+    .add-button {
+        width: 100%;
+        padding: 0.75rem;
+    }
+}

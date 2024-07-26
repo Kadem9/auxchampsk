@@ -7,6 +7,7 @@ import Modal from "../../../../../Utils/Modal.jsx";
 import ConfirmDeleteModal from "./ConfirmDeleteModal.jsx";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import '../../css/categories.css';
 
 function Categories() {
     const { categories, loading, createCategory, updateCategory, deleteCategory } = useCategory();
@@ -50,30 +51,27 @@ function Categories() {
         return <div>Chargement...</div>;
     }
 
-    // Trier les catégories par ordre avant de les afficher
     const sortedCategories = [...categories].sort((a, b) => a.ordre - b.ordre);
 
     return (
-        <div className="mt-3">
-            <h5>Les catégories</h5>
-            <p>Gérez les catégories de produits de votre magasin.</p>
-            <button className="rounded bg-primary-color border border-0 mb-2" onClick={() => setPageCreate(true)}>
+        <div className="categories-container">
+            <h5 className="title">Les catégories</h5>
+            <p className="description">Gérez les catégories de produits de votre magasin.</p>
+            <button className="add-button" onClick={() => setPageCreate(true)}>
                 <FontAwesomeIcon icon={faPlus} /> Ajouter une catégorie
             </button>
-            <div className="row">
+            <div className="categories-grid">
                 {sortedCategories.map((category) => (
-                    <div className="col-md-6" key={category.id}>
-                        <div className="card mb-2">
-                            <div className="card-body">
-                                <h6>{category.name}</h6>
-                                <p>Ordre : {category.ordre}</p>
-                                <button className="btn btn-warning me-2" onClick={() => setEditCategory(category)}>
-                                    <FontAwesomeIcon icon={faEdit} /> Modifier
-                                </button>
-                                <button className="btn btn-danger" onClick={() => setCategoryToDelete(category)}>
-                                    <FontAwesomeIcon icon={faTrash} /> Supprimer
-                                </button>
-                            </div>
+                    <div className="category-card" key={category.id}>
+                        <div className="card-content">
+                            <h6 className="category-name">{category.name}</h6>
+                            <p className="category-order">Ordre : {category.ordre}</p>
+                            <button className="edit-button" onClick={() => setEditCategory(category)}>
+                                <FontAwesomeIcon icon={faEdit} /> Modifier
+                            </button>
+                            <button className="delete-button" onClick={() => setCategoryToDelete(category)}>
+                                <FontAwesomeIcon icon={faTrash} /> Supprimer
+                            </button>
                         </div>
                     </div>
                 ))}

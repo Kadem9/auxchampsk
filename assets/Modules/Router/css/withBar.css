@@ -1,0 +1,80 @@
+/* Style de la navigation générale */
+.navigation-general-otherpage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(85, 173, 64, 0.78);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo-auxchamps {
+    margin-bottom: 1rem;
+}
+
+
+/* Style de la navigation */
+.navigation {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Style des liens de navigation */
+.text-navigation {
+    margin: 0 1rem;
+    font-size: 1rem;
+    text-decoration: none;
+    color: white;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.text-navigation:hover {
+    color: #eaeaea;
+}
+
+/* Style des éléments arrondis */
+.text-arrondi {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background-color: #ffffff;
+    color: #47b12d;
+    transition: background-color 0.3s;
+}
+
+.text-arrondi:hover {
+    background-color: #388e3c;
+}
+
+/* Style du compteur du panier */
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #ff5252;
+    color: #fff;
+    border-radius: 50%;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.8rem;
+}
+
+/* Media queries pour un design responsive */
+@media (max-width: 768px) {
+    .navigation-general-otherpage {
+        padding: 0.5rem 1rem;
+    }
+
+    .logo-auxchamps {
+        width: 100px;
+    }
+
+    .navigation {
+        flex-direction: column;
+    }
+
+    .text-navigation {
+        margin: 0.5rem 0;
+    }
+}

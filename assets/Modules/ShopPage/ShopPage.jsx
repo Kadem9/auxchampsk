@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { useProduct } from "../../Context/ProductContext.jsx";
@@ -7,15 +7,38 @@ import ReactPaginate from "react-paginate";
 import "./ShopPage.css";
 import { useCart } from "../../Context/CartContext.jsx";
 import { useUser } from "../../Context/UserContext.jsx";
+import { Link, useParams } from "react-router-dom";
 
 function ShopPage() {
+    const { id } = useParams();
     const { user } = useUser();
     const { products, loading, setSearchQuery, setSelectedCategory, searchQuery, selectedCategory } = useProduct();
     const { categories } = useCategory();
     const { addToCart, cart } = useCart();
     const [currentPage, setCurrentPage] = useState(0);
     const [quantities, setQuantities] = useState({});
+    const [shopOwner, setShopOwner] = useState(null);
     const productsPerPage = 10;
+
+    useEffect(() => {
+        const fetchShopOwner = async () => {
+            try {
+                const response = await fetch(`/api/magasins/${id}`);
+                if (response.ok) {
+                    const shop = await response.json();
+                    const ownerResponse = await fetch(shop.user);
+                    if (ownerResponse.ok) {
+                        const owner = await ownerResponse.json();
+                        setShopOwner(owner);
+                    }
+                }
+            } catch (error) {
+                console.error("Erreur lors de la récupération des informations du propriétaire du magasin:", error);
+            }
+        };
+
+        fetchShopOwner();
+    }, [id]);
 
     if (loading) {
         return <div>Chargement...</div>;
@@ -53,7 +76,11 @@ function ShopPage() {
     return (
         <div className="shop-page container">
             <div className="shop-header d-flex justify-content-between align-items-center mb-3">
-                <h5>Produits du Magasin</h5>
+                {shopOwner && (
+                    <h5>
+                        Magasin de <Link to={`/profil/fermier/${shopOwner.id}`}>{shopOwner.firstname} {shopOwner.lastname}</Link>
+                    </h5>
+                )}
                 <div className="shop-filters d-flex">
                     <div className="input-group">
                         <input
@@ -126,8 +153,16 @@ function ShopPage() {
                 marginPagesDisplayed={2}
                 pageRangeDisplayed={5}
                 onPageChange={handlePageClick}
-                containerClassName={"pagination justify-content-center"}
+                containerClassName={"pagination"}
                 activeClassName={"active"}
+                previousClassName={"page-item"}
+                nextClassName={"page-item"}
+                breakClassName={"page-item"}
+                pageClassName={"page-item"}
+                pageLinkClassName={"page-link"}
+                previousLinkClassName={"page-link"}
+                nextLinkClassName={"page-link"}
+                breakLinkClassName={"page-link"}
             />
         </div>
     );

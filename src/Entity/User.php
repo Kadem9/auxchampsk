@@ -11,6 +11,7 @@ use App\Repository\UserRepository;
 use App\State\UserPasswordHasher;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -55,6 +56,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $typeUser = null;
 
+    #[Groups(['user:create', 'user:update'])]
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $pictureProfil = null;
 
@@ -99,10 +101,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $hasSeenWelcomePage = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $presentation = null;
+
+    #[ORM\OneToMany(targetEntity: Order::class, mappedBy: 'client')]
+    private Collection $orders;
+
     public function __construct()
     {
         $this->societes = new ArrayCollection();
         $this->magasins = new ArrayCollection();
+        $this->orders = new ArrayCollection();
     }
 
     public function getPlainPassword(): ?string
@@ -391,6 +400,48 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setHasSeenWelcomePage(?bool $hasSeenWelcomePage): static
     {
         $this->hasSeenWelcomePage = $hasSeenWelcomePage;
+
+        return $this;
+    }
+
+    public function getPresentation(): ?string
+    {
+        return $this->presentation;
+    }
+
+    public function setPresentation(?string $presentation): static
+    {
+        $this->presentation = $presentation;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Order>
+     */
+    public function getOrders(): Collection
+    {
+        return $this->orders;
+    }
+
+    public function addOrder(Order $order): static
+    {
+        if (!$this->orders->contains($order)) {
+            $this->orders->add($order);
+            $order->setClient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrder(Order $order): static
+    {
+        if ($this->orders->removeElement($order)) {
+            // set the owning side to null (unless already changed)
+            if ($order->getClient() === $this) {
+                $order->setClient(null);
+            }
+        }
 
         return $this;
     }

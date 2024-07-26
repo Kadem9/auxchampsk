@@ -5,6 +5,8 @@ import InformationsAccount from "./components/MyAccount.jsx";
 import MyShop from "./components/MyShop/MyShop.jsx";
 import PageHome from "./components/PageHome.jsx";
 import MyCompany from "./components/MyCompany/MyCompany.jsx";
+import EditMyProfil from "./components/MyProfil/EditMyProfil.jsx";
+import {useUser} from "../../Context/UserContext.jsx";
 function MyAccount({}) {
     return (
         <div className="container mt-4" id="my-account">
@@ -19,6 +21,7 @@ function MyAccount({}) {
                         <Route path="informations-personnelles" element={<InformationsAccount/>}/>
                         <Route path="mon-magasin" element={<MyShop/>}/>
                         <Route path="societes" element={<MyCompany/>}/>
+                        <Route path="mon-profil" element={<EditMyProfil/>}/>
                     </Routes>
                 </div>
             </div>

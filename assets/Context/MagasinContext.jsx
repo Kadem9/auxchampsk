@@ -7,6 +7,7 @@ export const MagasinProvider = ({ children }) => {
     const { user } = useUser();
     const [magasins, setMagasins] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [allMagasins, setAllMagasins] = useState([]);
 
     useEffect(() => {
         if (user) {
@@ -27,6 +28,19 @@ export const MagasinProvider = ({ children }) => {
             console.error("Erreur lors de la récupération des magasins:", error);
         }
     };
+
+    const fetchAllMagasins = async () => {
+        try {
+            const response = await fetch(`/api/magasins`);
+            if (!response.ok) {
+                throw new Error("Impossible de récupérer les magasins.");
+            }
+            const data = await response.json();
+            setAllMagasins(data);
+        } catch (error) {
+            console.error("Erreur lors de la récupération des magasins:", error);
+        }
+    }
 
     const createMagasin = async (magasin) => {
         try {
@@ -73,6 +87,8 @@ export const MagasinProvider = ({ children }) => {
         loading,
         createMagasin,
         updateMagasin,
+        fetchAllMagasins,
+        allMagasins,
     };
 
     return (

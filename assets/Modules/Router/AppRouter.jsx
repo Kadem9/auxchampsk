@@ -10,6 +10,8 @@ import ShopPage from "../ShopPage/ShopPage.jsx";
 import {ProductProvider} from "../../Context/ProductContext.jsx";
 import {CartProvider} from "../../Context/CartContext.jsx";
 import Cart from "../MyAccountComponent/components/Cart/Cart.jsx";
+import HomePageSearch from "../HomeSearchShop/HomePageSearch.jsx";
+import MyProfil from "../MyAccountComponent/components/MyProfil/MyProfil.jsx";
 
 function AppRouter() {
     return (
@@ -23,6 +25,7 @@ function AppRouter() {
                 <Route path="/connexion" />
                 <Route path="/mon-compte/*" element={<MyAccount />} />
                 <Route path="/mon-compte/magasin/:id/*" element={<ManageShop />} />
+                <Route path="/profil/fermier/:id" element={<MyProfil />} />
                 <Route path="/magasin/:id" element={
                     <ProductProvider>
                         <ShopPage />
@@ -31,6 +34,7 @@ function AppRouter() {
                 <Route path="/panier" element={
                     <Cart />
                 } />
+                <Route path="/trouver-magasin" element={<HomePageSearch/>}/>
             </Routes>
             </CartProvider>
         </>

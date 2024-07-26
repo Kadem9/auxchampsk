@@ -7,6 +7,10 @@ body {
     box-sizing: border-box;
 }
 
+* {
+    font-family: 'Encode Sans', sans-serif;
+}
+
 .bg-primary-color {
     background-color: #47B12D;
     color: white;
@@ -26,5 +30,5 @@ label {
 
 #home {
     background: #EDEDED;
-    height: 100vh;
+    min-height: 100vh;
 }

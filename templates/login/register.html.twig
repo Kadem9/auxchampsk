@@ -42,7 +42,7 @@
                 if (type === 'farmer') {
                     dynamicForm.innerHTML = `
                         <h2>Inscription Agriculteur</h2>
-                        <form id="farmer-form">
+                        <form id="farmer-form" method="POST" enctype="multipart/form-data">
                             <input class="d-none" type="text" id="type" name="type" value="Agriculteur">
                             <input class="d-none" type="text" name="leurre">
                             <div class="form-group">

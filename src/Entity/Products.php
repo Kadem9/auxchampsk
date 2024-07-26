@@ -33,6 +33,10 @@ class Products
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = null;
 
+    public function __toString(): string
+    {
+        return $this->name;
+    }
     public function getId(): ?int
     {
         return $this->id;

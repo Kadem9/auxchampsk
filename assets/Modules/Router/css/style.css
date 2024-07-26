@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
+    z-index: 100;
 }
 
 .navigation-general-otherpage {
@@ -17,13 +18,12 @@
 }
 
 .text-arrondi {
-    border-radius: 10px;
-    border: 1px solid black;
+    border-radius: 6px;
     padding: 3px 6px;
 }
 
 .navigation a {
-margin-right: 5px;
+    margin-right: 1px!important;
     font-size: 0.950rem;
 }
 
@@ -61,4 +61,12 @@ margin-right: 5px;
 
 .bg-navbar {
     background-color: #47B12D;
+}
+
+.navigation-sous-header {
+    justify-content: space-between;
+    display: flex;
+    min-width: 100%;
+    align-items: center;
+    padding: 10px;
 }

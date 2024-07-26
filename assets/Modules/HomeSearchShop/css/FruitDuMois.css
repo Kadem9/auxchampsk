@@ -1,0 +1,19 @@
+.preview-image-carousel {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .preview-image-carousel {
+        width: 150px;
+        height: 150px;
+        border-radius: 150px;
+    }
+
+
+}
+.custom-dot-list-style {
+       display: none!important;
+   }

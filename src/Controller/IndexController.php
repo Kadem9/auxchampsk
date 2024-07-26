@@ -40,4 +40,21 @@ class IndexController extends AbstractController
             'user' => $this->getUser()
         ]);
     }
-}
+
+    #[Route('/infos', name: 'infos')]
+    public function infos($page = ''): Response
+    {
+
+        return $this->render('infos/infos.html.twig', [
+        ]);
+    }
+
+    #[Route('/profil/fermier/{id}', name: 'profil_fermier')]
+    public function profil($id = ''): Response
+    {
+
+        return $this->render('infos/infos.html.twig', [
+        ]);
+    }
+
+    }

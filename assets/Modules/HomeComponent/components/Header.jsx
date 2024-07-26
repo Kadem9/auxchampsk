@@ -12,10 +12,10 @@ function Header() {
                     initial="hidden"
                     animate="visible"
                 >
-                    <motion.h1 variants={itemVariants}>
+                    <motion.h1 className="mb-4" variants={itemVariants}>
                         Du champ à votre assiette :<br/> qualité et équité
                     </motion.h1>
-                    <motion.p className="presentation-site" variants={itemVariants}>
+                    <motion.p className="presentation-site mb-4" variants={itemVariants}>
                         En choisissant AuxChamps, vous soutenez une rémunération équitable
                         pour nos agriculteurs
                         tout en vous garantissant des produits de qualité supérieure !

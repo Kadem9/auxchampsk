@@ -9,6 +9,7 @@ import { MagasinProvider } from "../../Context/MagasinContext.jsx";
 import { ProductProvider } from "../../Context/ProductContext.jsx";
 import { CategoryProvider } from "../../Context/CategoryContext.jsx";
 import { CartProvider } from "../../Context/CartContext.jsx";
+import {ProfileEditProvider} from "../../Context/ProfileEditContext.jsx";
 
 export function index() {
     const root = document.getElementById("home");
@@ -24,8 +25,10 @@ export function index() {
                                 <MagasinProvider>
                                     <ProductProvider>
                                         <CategoryProvider>
-                                            <Menu theme={"home-page"} />
-                                            <AppRouter />
+                                            <ProfileEditProvider>
+                                                <Menu theme={"home-page"} />
+                                                <AppRouter />
+                                            </ProfileEditProvider>
                                         </CategoryProvider>
                                     </ProductProvider>
                                 </MagasinProvider>

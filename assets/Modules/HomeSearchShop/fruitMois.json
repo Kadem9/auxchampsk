@@ -1,0 +1,52 @@
+[
+  {
+    "nom": "Pomme",
+    "description": "Un fruit croquant et juteux, parfait pour les collations.",
+    "image_url": "pomme.webp"
+  },
+  {
+    "nom": "Poire",
+    "description": "Un fruit sucré et tendre, excellent pour les desserts.",
+    "image_url": "poire.webp"
+  },
+  {
+    "nom": "Raisin",
+    "description": "Des grappes sucrées, idéales pour les collations et les salades.",
+    "image_url": "raisin.webp"
+  },
+  {
+    "nom": "Figue",
+    "description": "Un fruit sucré et juteux, parfait pour les collations ou les desserts.",
+    "image_url": "figue.webp"
+  },
+  {
+    "nom": "Prune",
+    "description": "Un fruit sucré et juteux, souvent utilisé dans les confitures.",
+    "image_url": "prune.webp"
+  },
+  {
+    "nom": "Courgette",
+    "description": "Un légume polyvalent, idéal pour les plats cuits ou crus.",
+    "image_url": "courgette.webp"
+  },
+  {
+    "nom": "Tomate",
+    "description": "Un légume (ou fruit) juteux, parfait pour les salades et les sauces.",
+    "image_url": "tomate.webp"
+  },
+  {
+    "nom": "Aubergine",
+    "description": "Un légume savoureux, excellent grillé ou en ratatouille.",
+    "image_url": "aubergine.webp"
+  },
+  {
+    "nom": "Poivron",
+    "description": "Un légume croquant et coloré, parfait pour les salades et les plats cuits.",
+    "image_url": "poivron.webp"
+  },
+  {
+    "nom": "Carotte",
+    "description": "Un légume croquant et sucré, idéal cru ou cuit.",
+    "image_url": "carotte.webp"
+  }
+]
